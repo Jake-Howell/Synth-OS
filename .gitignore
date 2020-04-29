@@ -1,0 +1,14 @@
+BUILD/
+DebugConfig/
+mbed-os/
+resources/
+*.sct
+*.mbed
+*.scvd
+*.html
+*.lib
+*.uvoptx
+*.uvprojx
+*.jacob
+*.uvguix
+*.uvguix.jacob
