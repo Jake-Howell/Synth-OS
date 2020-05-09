@@ -1,4 +1,4 @@
-#include "updateOutput.cpp"
+#include "updateOutput.h"
 
 float UpdateOutput::sinWave(int tmr, float period){
 	float omega = (2.0f*PI/period)*(float)tmr;

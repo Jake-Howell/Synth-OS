@@ -1,4 +1,4 @@
-#include "updateOutput.cpp"
+#include "updateOutput.h"
 
 float UpdateOutput::sawWave(int tmr, float period){
 	float Vout = 0.0f;

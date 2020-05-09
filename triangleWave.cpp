@@ -1,4 +1,4 @@
-#include "updateOutput.cpp"
+#include "updateOutput.h"
 
 float UpdateOutput::triangleWave(int tmr, float period){
 

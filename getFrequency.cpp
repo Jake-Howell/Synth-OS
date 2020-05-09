@@ -1,9 +1,10 @@
 #include "synth_os.h"
 #include "sensorData.cpp"
 
-float SensorData::getFrequency(float lowerThreshold, float upperThreshold, int correction, float topFrequency)
+
+float SensorData::getFrequency()
 		{
-			
+
 			float resultingFrequency = 0;
 			float frequencyMultiplyer = 0;
 			float distance = 0;
@@ -22,15 +23,15 @@ float SensorData::getFrequency(float lowerThreshold, float upperThreshold, int c
 			sonar.stop();
 			//subtract software overhead timer delay and scale to cm
 			distance = ((sonar.read_us()-correction)/5.80f);
-
+			
 				
-			if (distance >= upperThreshold){
+			if (distance >= UPPER_THRESHOLD){
 				distance = 0;
 			}
-			else if (distance <= lowerThreshold){
+			else if (distance <= LOWER_THRESHOLD){
 				distance = 0;
 			}
-			frequencyMultiplyer = (distance - lowerThreshold)/(upperThreshold - lowerThreshold);
+			frequencyMultiplyer = (distance - LOWER_THRESHOLD)/(UPPER_THRESHOLD - LOWER_THRESHOLD);
 			
 			if (frequencyMultiplyer < 0){
 				frequencyMultiplyer = 0;
@@ -39,7 +40,7 @@ float SensorData::getFrequency(float lowerThreshold, float upperThreshold, int c
 				frequencyMultiplyer = 1;
 			}
 				
-			resultingFrequency = topFrequency*frequencyMultiplyer;
+			resultingFrequency = TOP_FREQUENCY*frequencyMultiplyer;
 			//resultingFrequency = 440.0f;
 			
 			return resultingFrequency;
