@@ -1,4 +1,4 @@
-#include "sensorData.cpp"
+#include "sensorData.h"
 
 float SensorData::calibrateSonar(){
 				Timer time;

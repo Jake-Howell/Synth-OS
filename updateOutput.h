@@ -1,14 +1,18 @@
-#include "synth_os.h"
-//not to self
-//these global may cause problems if multiple 
-//instances of this class are used at once.
-//be carefull!
-
-//DigitalOut runLed(LED2);
-//DigitalOut clipLed(LED3);
-//AnalogOut dac(D13);
 #ifndef UPDATEOUTPUT_H
 #define UPDATEOUTPUT_H
+#include "mbed.h"
+#include "rtos.h"
+#include "synth_os.h"
+
+
+//Shared Data
+typedef struct {
+	int waveType = SINE;
+	int currentSampleNo = 0;
+	float period = 2272.73;
+}output_mail_t;
+
+extern Mail<output_mail_t, 16>output_mail_box; 
 
 class UpdateOutput{
 	
@@ -18,7 +22,7 @@ class UpdateOutput{
 		UpdateOutput();
 		
 		//public member functions
-		float type(int waveType, int currentSampleNo, float period);
+		void type();
 				
 
 	private:
@@ -45,6 +49,10 @@ class UpdateOutput{
 		//extern float frequency(float lowerThreshold, float upperThreshold, int correction);
 		bool waveState = 0;
 		//float lastVout;
+
+		//extern mail_t;
+		//extern Mail<mail_t, 16>mail_box; 
+		
 };
 
 #endif

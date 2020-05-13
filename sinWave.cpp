@@ -14,6 +14,6 @@ float UpdateOutput::sinWave(int tmr, float period){
 		Vout = 0.0f;
 	}
 	//printf("Vout = %5.3f\n\r", Vout);
-
+	
 	return Vout;
 }//end of SIN

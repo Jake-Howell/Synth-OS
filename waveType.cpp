@@ -2,10 +2,21 @@
 //#define RUNTIME_LOGGING
 
 
-float UpdateOutput::type(int waveType, int currentSampleNo, float period){
-
-
-enum waves {OFF = 0, SINE, TRIANGLE, SAW, SQUARE};
+void UpdateOutput::type(){
+		int waveType;
+		int currentSampleNo;
+		float period;
+	
+		//reciving output mail
+		osEvent evt = output_mail_box.get();
+		if (evt.status == osEventMail) {
+			output_mail_t *output_mail = (output_mail_t*)evt.value.p;
+			waveType = output_mail->waveType;
+			currentSampleNo = output_mail->currentSampleNo;
+			period = output_mail->period;
+			output_mail_box.free(output_mail);
+		}//end of output_mail get
+		
 
 		switch(waveType)
 		{
@@ -55,5 +66,5 @@ enum waves {OFF = 0, SINE, TRIANGLE, SAW, SQUARE};
 					
 		dac.write(Vout);
 		}//end of wave type switch case
-		return Vout;
-	}
+		//return Vout;
+}

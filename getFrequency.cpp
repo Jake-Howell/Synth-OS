@@ -1,14 +1,13 @@
 #include "synth_os.h"
-#include "sensorData.cpp"
+#include "sensorData.h"
 
 
 float SensorData::getFrequency()
 		{
-
 			float resultingFrequency = 0;
 			float frequencyMultiplyer = 0;
 			float distance = 0;
-			// trigger sonar to send a ping
+			// trigger sonar to send pulse of 10us time period
 			trigger = 1;
 			sonar.reset();
 			wait_us(10.0);
@@ -24,7 +23,7 @@ float SensorData::getFrequency()
 			//subtract software overhead timer delay and scale to cm
 			distance = ((sonar.read_us()-correction)/5.80f);
 			
-				
+			
 			if (distance >= UPPER_THRESHOLD){
 				distance = 0;
 			}
@@ -39,10 +38,11 @@ float SensorData::getFrequency()
 			else if (frequencyMultiplyer > 1){
 				frequencyMultiplyer = 1;
 			}
-				
+			
 			resultingFrequency = TOP_FREQUENCY*frequencyMultiplyer;
 			//resultingFrequency = 440.0f;
 			
 			return resultingFrequency;
-			
+		
 		}
+		

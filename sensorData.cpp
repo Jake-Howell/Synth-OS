@@ -1,37 +1,19 @@
 #include "synth_os.h"
-
-//DigitalOut trigger(D6);
-//DigitalIn  echo(D7);
+#include "sensorData.h"
 
 
-class SensorData{
-	public:
-			
-		//constructor 
-		SensorData(): trigger(D6), echo(D7){
-		}
-		
-		void updateFrequency(){
-			
-				period = 10e6/getFrequency();
-			
-			/*
-			mail_t *mail = mailBox.alloc();
-			mail->period = frequency;
-      mailBox.put(mail);
-			*/
-		}
-				
-		
 
+//constructor 
+SensorData::SensorData(): trigger(D6), echo(D7){
+}
+//Serial pc(USBTX, USBRX);
+
+Mail<sensor_mail_t, 16>sensor_mail_box;
+//posting sensor mail
+void SensorData::updateFrequency(){
+	sensor_mail_t *sensor_mail = sensor_mail_box.alloc();
 	
-	private:
-		//private member functions
-		float getFrequency();
-		float calibrateSonar();
-		//private attributes
-		DigitalOut trigger;
-		DigitalIn  echo;
-		Timer sonar;		
-		int correction = calibrateSonar();
-};
+	sensor_mail->period = 10e6/getFrequency();
+	sensor_mail_box.put(sensor_mail);
+	
+}

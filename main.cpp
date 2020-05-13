@@ -2,64 +2,72 @@
 #include "rtos.h"
 #include "cmath"
 
-//Shared Data
-typedef struct {
-	float period = 2272.73f;
-}mail_t;
-Mail<mail_t, 16>mailBox; 
-
-//float period = 2272.73;
 
 #include "updateOutput.h"
-#include "sensorData.cpp"
+#include "sensorData.h"
+
+
 
 //Uncomment next line to turn runtime logging on. View in putty.
 //#define RUNTIME_LOGGING			
 Serial pc(USBTX, USBRX);
 DigitalOut led1(LED1);
-Mutex mutex;
+
 Thread outputThread;
-Thread inputThread;
+//Thread inputThread;
 
+Ticker inputTicker;
+//Ticker outputTicker;
 
-extern void beginHere();
+UpdateOutput wave;
+SensorData inputs;
 
-//protect shared data
+void updateInput(){
+	inputs.updateFrequency();
+}
 
-
-
-//Mail<mail_t, 16> mailBox; 
+void updateOutput(){
+	wave.type();
+}
 
 int main() {
 	pc.printf("\r\n\r\ninside main\r\n\r\n");
-	
-	
-	
-	Timer sampleClock;
-	UpdateOutput wave;
-	SensorData inputs;
-	
 
-	int currentSampleNo = 0;
+
+	int sampleNo = 0;
 	enum processes {UPDATE_OUTPUT = 0, GET_FREQUENCY};
-	enum waves {OFF = 0, SINE, TRIANGLE, SAW, SQUARE};
-	int waveType = OFF;
+	int setWaveType = OFF;
 	 
-	float Vout = 0.0f;
-	//replace with:
-	//float period = inputs.getFrequency(int correction);
-	//after bug fixes have been applied
+	float timePeriod;
 	
-	led1 = 1;					//turn on led1 to show code is running properly
+	led1 = 1;					//turn on led1 to show main is running
 	
+	//Updating output
+	outputThread.start(callback(updateOutput));
 	
-	while(true)
-	{
-		sampleClock.start();
-		if (sampleClock.read_us() >= SAMPLE_PERIOD_us){
-			Vout = wave.type(SINE, currentSampleNo, period);
-			sampleClock.reset();
-		}
-	}
-
-}
+	//getting inputs 
+	inputTicker.attach(callback(updateInput),0.1f);
+		
+	//add one or reset sampleNo after outputTicker
+	sampleNo = (sampleNo > SAMPLES_PER_SECOND)?(sampleNo++):0;
+	
+	//UPDATING OUTPUT
+	while(true){
+		
+		//reciveing sensor mail
+		osEvent evt = sensor_mail_box.get();
+		if (evt.status == osEventMail) {
+			sensor_mail_t *sensor_mail = (sensor_mail_t*)evt.value.p;
+			timePeriod = sensor_mail->period;
+			sensor_mail_box.free(sensor_mail);
+		}//end of send sensor mail
+		
+		//posting output_mail
+		extern Mail<output_mail_t, 16>output_mail_box;
+		output_mail_t *output_mail = output_mail_box.alloc();
+		output_mail->waveType = setWaveType;
+		output_mail->currentSampleNo = sampleNo;
+		output_mail->period = timePeriod; 
+		output_mail_box.put(output_mail);
+		}//end of while
+}//end of main
