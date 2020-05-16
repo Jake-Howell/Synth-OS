@@ -1,3 +1,12 @@
+////////////////////////////////
+//														//
+//	This code is not finished	//
+//	and has some parts that 	//
+//	will be removed or 				//
+//	updated soon.							//
+//														//
+////////////////////////////////
+
 #include "mbed.h"
 #include "rtos.h"
 #include "cmath"
@@ -22,10 +31,12 @@ Ticker inputTicker;
 UpdateOutput wave;
 SensorData inputs;
 
+//callback to run the inputs.updateFrequency() instance as a thread
 void updateInput(){
 	inputs.updateFrequency();
 }
 
+//callback to run the wave.type() instance as a thread
 void updateOutput(){
 	wave.type();
 }

@@ -1,3 +1,12 @@
+//This file is a public member function of the UpdateOutput class.
+//It is used to quickly select the type of output wave required 
+//and pass any relavent data to them for each sample
+//waveType() gets the current sample number and time period
+//from the "output_mail_box" struct that's updated by main()
+//it then passes these varibles to the user selected wave type 
+//which are all initalised as private member functions of the UpdateOutput class
+
+
 #include "updateOutput.h"
 //#define RUNTIME_LOGGING
 
