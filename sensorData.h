@@ -12,7 +12,7 @@
 
 //Shared Data
 typedef struct {
-	float period = 2272.73f;
+	float samplesInPeriod = 2272.73f;
 }sensor_mail_t;
 
 extern Mail<sensor_mail_t, 16>sensor_mail_box; 

@@ -13,7 +13,8 @@ Mail<sensor_mail_t, 16>sensor_mail_box;
 void SensorData::updateFrequency(){
 	sensor_mail_t *sensor_mail = sensor_mail_box.alloc();
 	
-	sensor_mail->period = 10e6/getFrequency();
+	//setting period in terms of samples per second
+	sensor_mail->samplesInPeriod = SAMPLES_PER_SECOND/getFrequency();
 	sensor_mail_box.put(sensor_mail);
 	
 }

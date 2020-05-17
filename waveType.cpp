@@ -11,20 +11,7 @@
 //#define RUNTIME_LOGGING
 
 
-void UpdateOutput::type(){
-		int waveType;
-		int currentSampleNo;
-		float period;
-	
-		//reciving output mail
-		osEvent evt = output_mail_box.get();
-		if (evt.status == osEventMail) {
-			output_mail_t *output_mail = (output_mail_t*)evt.value.p;
-			waveType = output_mail->waveType;
-			currentSampleNo = output_mail->currentSampleNo;
-			period = output_mail->period;
-			output_mail_box.free(output_mail);
-		}//end of output_mail get
+void UpdateOutput::type(int waveType, int currentSampleNo, float period){
 		
 
 		switch(waveType)
@@ -73,7 +60,8 @@ void UpdateOutput::type(){
 				waveType = OFF;
 				break;
 					
-		dac.write(Vout);
+		
 		}//end of wave type switch case
 		//return Vout;
+		dac.write(Vout);
 }

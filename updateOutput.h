@@ -9,10 +9,10 @@
 typedef struct {
 	int waveType = SINE;
 	int currentSampleNo = 0;
-	float period = 2272.73;
+	float samplesInPeriod = 2272.73;
 }output_mail_t;
 
-extern Mail<output_mail_t, 16>output_mail_box; 
+
 
 class UpdateOutput{
 	
@@ -22,7 +22,7 @@ class UpdateOutput{
 		UpdateOutput();
 		
 		//public member functions
-		void type();
+		void type(int waveType, int currentSampleNo, float samplesInPeriod);
 				
 
 	private:
@@ -38,20 +38,17 @@ class UpdateOutput{
 		float Vout;
 		
 		//private member functions
-		float sinWave(int currentSampleNo, float period);
+		float sinWave(int currentSampleNo, float samplesInPeriod);
 
-		float sawWave(int currentSampleNo, float period);
+		float sawWave(int currentSampleNo, float samplesInPeriod);
 
-		float triangleWave(int currentSampleNo, float period);
+		float triangleWave(int currentSampleNo, float samplesInPeriod);
 
-		float squareWave(int currentSampleNo, float period);
+		float squareWave(int currentSampleNo, float samplesInPeriod);
 		
-		//extern float frequency(float lowerThreshold, float upperThreshold, int correction);
 		bool waveState = 0;
 		//float lastVout;
 
-		//extern mail_t;
-		//extern Mail<mail_t, 16>mail_box; 
 		
 };
 

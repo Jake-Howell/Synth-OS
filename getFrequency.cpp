@@ -4,9 +4,9 @@
 
 float SensorData::getFrequency()
 		{
-			float resultingFrequency = 0;
-			float frequencyMultiplyer = 0;
-			float distance = 0;
+			float resultingFrequency = 0.0f;
+			float frequencyMultiplyer = 0.0f;
+			float distance = 0.0f;
 			// trigger sonar to send pulse of 10us time period
 			trigger = 1;
 			sonar.reset();
@@ -25,21 +25,21 @@ float SensorData::getFrequency()
 			
 			
 			if (distance >= UPPER_THRESHOLD){
-				distance = 0;
+				distance = 0.0f;
 			}
 			else if (distance <= LOWER_THRESHOLD){
-				distance = 0;
+				distance = 0.0f;
 			}
 			frequencyMultiplyer = (distance - LOWER_THRESHOLD)/(UPPER_THRESHOLD - LOWER_THRESHOLD);
 			
-			if (frequencyMultiplyer < 0){
-				frequencyMultiplyer = 0;
+			if (frequencyMultiplyer < 0.0f){
+				frequencyMultiplyer = 0.000001;
 			}
-			else if (frequencyMultiplyer > 1){
-				frequencyMultiplyer = 1;
+			else if (frequencyMultiplyer > 1.0f){
+				frequencyMultiplyer = 1.0f;
 			}
 			
-			resultingFrequency = TOP_FREQUENCY*frequencyMultiplyer;
+			resultingFrequency = TOP_FREQUENCY-(TOP_FREQUENCY*frequencyMultiplyer);
 			//resultingFrequency = 440.0f;
 			
 			return resultingFrequency;
