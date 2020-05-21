@@ -26,7 +26,9 @@ class UpdateOutput{
 		AnalogOut dac;
 	
 		Timer runTimeTest;
-		Timer sampleTimer;
+		Timer sampleClock;
+		Timer sampleTriggerClock;
+		
 	
 		int runTime = runTimeTest.read_us();
 		float Vout;

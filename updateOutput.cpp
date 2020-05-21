@@ -2,8 +2,10 @@
 #include "updateOutput.h"
 		//constructor for class, with member initializer list
 		UpdateOutput::UpdateOutput():runLed(LED2), clipLed(LED3), dac(D13){
-			sampleTimer.reset();
-			sampleTimer.start();
+			sampleClock.reset();
+			sampleClock.start();
+			sampleTriggerClock.reset();
+			sampleTriggerClock.start();
 		}
 		
 		
