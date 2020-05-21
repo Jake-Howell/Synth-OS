@@ -3,20 +3,10 @@
 
 #include "synth_os.h"
 #include "mbed.h"
-#include "rtos.h"
-//DigitalOut trigger(D6);
-//DigitalIn  echo(D7);
+//#include "rtos.h"
+#include "updateOutput.h"
 
-//extern mail_t;
-//extern Mail<mail_t, 16>mail_box; 
-
-//Shared Data
-typedef struct {
-	float samplesInPeriod = 2272.73f;
-}sensor_mail_t;
-
-extern Mail<sensor_mail_t, 16>sensor_mail_box; 
-
+extern UpdateOutput wave;
 extern Serial pc;
 
 class SensorData{
@@ -33,11 +23,14 @@ class SensorData{
 		//private member functions
 		float getFrequency();
 		float calibrateSonar();
+		
 		//private attributes
 		DigitalOut trigger;
 		DigitalIn  echo;
 		Timer sonar;		
 		int correction = calibrateSonar();
+
+		float samplesInPeriod = 100.0f;
 
 };
 #endif

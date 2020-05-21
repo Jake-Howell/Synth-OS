@@ -1,12 +1,12 @@
 #include "updateOutput.h"
 
-float UpdateOutput::triangleWave(int tmr, float period){
+float UpdateOutput::triangleWave(){
 
 				float Vout = 0.0f;
 				float resultingWave;
 				float wave1;
 				
-				wave1 = (2*(float)(tmr % (int)period)/period);
+				wave1 = (2*(float)(currentSampleNo % (int)samplesInPeriod)/samplesInPeriod);
 
 				//decide if wave should rise or fall
 				if (wave1 > 1.0f){	

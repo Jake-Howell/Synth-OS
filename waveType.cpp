@@ -1,7 +1,7 @@
 //This file is a public member function of the UpdateOutput class.
 //It is used to quickly select the type of output wave required 
 //and pass any relavent data to them for each sample
-//waveType() gets the current sample number and time period
+//waveType() gets the current sample number and time samplesInPeriod
 //from the "output_mail_box" struct that's updated by main()
 //it then passes these varibles to the user selected wave type 
 //which are all initalised as private member functions of the UpdateOutput class
@@ -11,7 +11,7 @@
 //#define RUNTIME_LOGGING
 
 
-void UpdateOutput::type(int waveType, int currentSampleNo, float period){
+void UpdateOutput::type(){
 		
 
 		switch(waveType)
@@ -25,7 +25,7 @@ void UpdateOutput::type(int waveType, int currentSampleNo, float period){
 				runTimeTest.reset();
 				runTimeTest.start();
 				#endif
-				Vout = sinWave(currentSampleNo , period);
+				Vout = sinWave();
 				
 				
 				break;
@@ -35,7 +35,7 @@ void UpdateOutput::type(int waveType, int currentSampleNo, float period){
 				runTimeTest.reset();
 				runTimeTest.start();
 				#endif
-				Vout = triangleWave(currentSampleNo , period);
+				Vout = triangleWave();
 				break;
 			
 			case SAW:
@@ -44,7 +44,7 @@ void UpdateOutput::type(int waveType, int currentSampleNo, float period){
 				runTimeTest.start();
 				#endif
 			
-				Vout = sawWave(currentSampleNo, period);
+				Vout = sawWave();
 				break;
 			
 			case SQUARE:
@@ -53,7 +53,7 @@ void UpdateOutput::type(int waveType, int currentSampleNo, float period){
 				runTimeTest.start();
 				#endif
 			
-				Vout = squareWave(currentSampleNo, period);
+				Vout = squareWave();
 				break;
 			
 			default:

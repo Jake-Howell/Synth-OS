@@ -1,11 +1,11 @@
 #include "updateOutput.h"
 
-float UpdateOutput::squareWave(int tmr, float period){
+float UpdateOutput::squareWave(){
 	float Vout = 0.0f;
 	//float period5 = period/1.587401052;
 	float resultingWave;
 	
-	float x = (float)(tmr % (int)period)/period;
+	float x = (float)(currentSampleNo % (int)samplesInPeriod)/samplesInPeriod;
 	
 	if (x > 0.5f){
 		resultingWave = 1.0f;

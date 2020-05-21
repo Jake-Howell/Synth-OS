@@ -1,14 +1,14 @@
 #include "updateOutput.h"
 
-float UpdateOutput::sawWave(int tmr, float period){
+float UpdateOutput::sawWave(){
 	float Vout = 0.0f;
-	//	float period5 = period/1.587401052f;
+	//	float period5 = samplesInPeriod/1.587401052f;
 	float resultingWave;
 	float wave1 = 0.0f;
 	//float wave2 = 0.0f;
 	
-	//wave2 = ((float)(tmr % (int)period5)/period5);
-	wave1 = (0.5f*(float)(tmr % (int)period)/period);
+	//wave2 = ((float)(currentSampleNo % (int)period5)/period5);
+	wave1 = (0.5f*(float)(currentSampleNo % (int)samplesInPeriod)/samplesInPeriod);
 	
 	if (wave1 > 1.0f){
 		clipLed = 1;

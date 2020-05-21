@@ -1,6 +1,6 @@
 #include "updateOutput.h"
 
-float UpdateOutput::sinWave(int currentSampleNo, float samplesInPeriod){
+float UpdateOutput::sinWave(){
 	float omega = (2.0f*PI/samplesInPeriod)*(float)currentSampleNo;
 	float wave = sin(omega);
 	float Vout = (wave/(2.0f*WAVE_DEVIDOR))+0.5f; //translate wave to work between 0 and 1 rather than -1 and 1
