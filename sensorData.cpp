@@ -12,8 +12,7 @@ SensorData::SensorData(): trigger(D6), echo(D7){
 void SensorData::updateFrequency(){
 	
 	//setting period in terms of samples per second
-	samplesInPeriod = SAMPLES_PER_SECOND/getFrequency();
+	samplesInPeriod = SAMPLES_PER_SECOND/(int)getFrequency();
 	wave.setWavePeriod(samplesInPeriod);
-	
 	
 }

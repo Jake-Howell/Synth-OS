@@ -7,7 +7,7 @@ enum waves {OFF = 0, SINE, TRIANGLE, SAW, SQUARE};
 #define PI 3.14159265f						
 #define WAVE_DEVIDOR 2.0f					//keeps wave well within 0 - 3.3v output voltage
 #define SAMPLE_PERIOD_us 23				//us
-#define SAMPLES_PER_SECOND 43478	//Hz - 1/(SAMPLE_PERIOD_us)
+#define SAMPLES_PER_SECOND 43478	//Hz // 1/(SAMPLE_PERIOD_us)
 
 //////////sensor data//////////
 
@@ -22,7 +22,7 @@ enum waves {OFF = 0, SINE, TRIANGLE, SAW, SQUARE};
 #define OFF_FREQUENCY 1.0f				//Hz
 
 
-#define UPDATE_INPUT_RATE 0.05f		//s
+#define UPDATE_INPUT_RATE 0.04f		//s
 
 
 //#define LOGGING

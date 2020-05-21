@@ -4,7 +4,7 @@
 
 extern UpdateOutput wave;
 
-void UpdateOutput::createSample(int setWaveType){
+void UpdateOutput::createSample(){
 	
 	
 	int currentTime = sampleClock.read_us();						//read sampleClock function
@@ -27,10 +27,6 @@ void UpdateOutput::createSample(int setWaveType){
 			sampleClock.reset();	//reset sampleClock each second to prevent overflow 
 		}
 		sampleTriggerClock.reset();
-		
-		//add one or reset sampleNo after outputTicker or reset if it's reached 1 second of samples
-		//currentSampleNo = (currentSampleNo < SAMPLES_PER_SECOND)?(currentSampleNo+1):0;
-		//sampleTimer.reset();
-		//sampleTimer.start();
+
 	}// end of if
 }

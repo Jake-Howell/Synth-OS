@@ -13,8 +13,9 @@ class UpdateOutput{
 		UpdateOutput();
 		
 		//public member functions
-		void createSample(int setWaveType);
-		void setWavePeriod(float samplesInPeriod);
+		void createSample();
+		void setWavePeriod(int samplesInPeriod);
+		void setWaveType(int newWaveType);
 		
 				
 
@@ -41,9 +42,9 @@ class UpdateOutput{
 		float squareWave();
 	
 		//private attributes
-		int waveType = SINE;
+		int waveType = OFF;
 		int currentSampleNo = 20;
-		float samplesInPeriod = 100.0f;
+		int samplesInPeriod = 100;
 		bool waveState = 0;
 		//float lastVout;
 

@@ -16,6 +16,7 @@ class SensorData{
 		SensorData();
 		
 		void updateFrequency();
+		void waveTypeSelector();
 		
 
 	
@@ -27,7 +28,9 @@ class SensorData{
 		//private attributes
 		DigitalOut trigger;
 		DigitalIn  echo;
+		Timer debounce;
 		Timer sonar;		
+		int currentWaveType = OFF;
 		int correction = calibrateSonar();
 		float frequencyRange = (TOP_FREQUENCY - BOTTOM_FREQUENCY);
 		float samplesInPeriod = 100.0f;

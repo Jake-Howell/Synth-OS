@@ -32,11 +32,6 @@ SensorData inputs;
 //#define RUNTIME_LOGGING			
 
 
-//callback to run the inputs.updateFrequency() instance as a thread
-void updateInput(){
-	inputs.updateFrequency();
-}
-
 int main() {
 	pc.printf("\r\n\r\ninside main\r\n\r\n");
 	
@@ -49,14 +44,17 @@ int main() {
 	
 	led1 = 1;					//turn on led1 to show main is running
 
+	wave.setWaveType(SINE);
+	
 	trigger.reset();
 	trigger.start();
 	//UPDATING OUTPUT
 	while(true){
 		while (trigger.read() < UPDATE_INPUT_RATE){
-			wave.createSample(setWaveType);
+			wave.createSample();
 		}
 		trigger.reset();
+		inputs.waveTypeSelector();
 		inputs.updateFrequency();
 	}//end of while
 }//end of main
