@@ -29,7 +29,7 @@ class SensorData{
 		DigitalIn  echo;
 		Timer sonar;		
 		int correction = calibrateSonar();
-
+		float frequencyRange = (TOP_FREQUENCY - BOTTOM_FREQUENCY);
 		float samplesInPeriod = 100.0f;
 
 };

@@ -30,14 +30,15 @@ float SensorData::getFrequency()
 			//subtract software overhead timer calculate distance in cm
 			distance = ((sonar.read_us()-correction)/58.8f);
 			
-			
-			if (distance >= UPPER_THRESHOLD){  //check if distance is beyond desired operating threshold
-				//distance = 1.0f; //set distance to 0
-				resultingFrequency = BOTTOM_FREQUENCY;	//set to min frequency
+			if(distance >= OFF_DISTANCE){
+				resultingFrequency = OFF_FREQUENCY;
 				return resultingFrequency;
 			}
+			else if (distance >= UPPER_THRESHOLD){  //check if distance is beyond desired operating threshold
+				resultingFrequency = BOTTOM_FREQUENCY;	//set to min frequency
+				return resultingFrequency;
+			} 
 			else if (distance <= LOWER_THRESHOLD){  //check if distance is below desired operating threshold 
-				//distance = 0.0f; //set distance to 0
 				resultingFrequency = TOP_FREQUENCY;		//set to max frequency
 				
 				return resultingFrequency;
@@ -45,13 +46,15 @@ float SensorData::getFrequency()
 			frequencyMultiplyer = (distance - LOWER_THRESHOLD)/(UPPER_THRESHOLD - LOWER_THRESHOLD); //calculate what frequency the distance corresponds to
 			
 			if (frequencyMultiplyer < 0.0f){ //check if multiplier is less than 0 (occurs when distance is below lower threshold or above upper threshold)
-				frequencyMultiplyer = 0.000001; 
+				frequencyMultiplyer = 0.000001f; 
 			}
 			else if (frequencyMultiplyer > 1.0f){  //check if multiplier is above 1 
 				frequencyMultiplyer = 1.0f;  //set multiplier to 1 if it is above 1, as 1 is the max value
 			}
 			
-			resultingFrequency = TOP_FREQUENCY-(TOP_FREQUENCY*frequencyMultiplyer);
+			//This line sets frequency: the further away your hand 
+			//is from the sensor, the lower the frequency
+			resultingFrequency = ((frequencyRange) - ((frequencyRange)*frequencyMultiplyer))+ BOTTOM_FREQUENCY;
 			//resultingFrequency = 440.0f;
 			
 			return resultingFrequency;

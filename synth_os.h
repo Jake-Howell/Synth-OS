@@ -9,11 +9,19 @@ enum waves {OFF = 0, SINE, TRIANGLE, SAW, SQUARE};
 #define SAMPLE_PERIOD_us 23				//us
 #define SAMPLES_PER_SECOND 44100	//Hz
 
-//sensor data
-#define LOWER_THRESHOLD 10.0f			//cm
+//////////sensor data//////////
+
+//distance thresholds
 #define UPPER_THRESHOLD 60.0f			//cm
-#define TOP_FREQUENCY 784.0f			//Hz
-#define BOTTOM_FREQUENCY 1.0f			//Hz
+#define LOWER_THRESHOLD 10.0f			//cm
+#define OFF_DISTANCE 100.0f				//cm
+
+//frequency thresholds
+#define TOP_FREQUENCY 880.0f			//Hz
+#define BOTTOM_FREQUENCY 220.0f		//Hz
+#define OFF_FREQUENCY 1.0f				//Hz
+
+
 #define UPDATE_INPUT_RATE 0.05f		//s
 
 
