@@ -3,7 +3,7 @@
 DigitalIn button(USER_BUTTON);
 
 void SensorData::waveTypeSelector(){
-	
+	enum {RELEASED = 0, PRESSED};
 	while(button == 1){
 		debounce.reset();
 		debounce.start();
@@ -13,9 +13,8 @@ void SensorData::waveTypeSelector(){
 		}
 		debounce.stop();
 		debounce.reset();
-	
-	
-		if (button == 1){ //check if button still = 1 after debounce buffer
+		//check if button still = 1 after debounce buffer
+		if (button == PRESSED){ 
 			currentWaveType = currentWaveType + 1;
 				//make sure we stay only select existing wave types
 			if (currentWaveType > SQUARE){	
@@ -23,16 +22,11 @@ void SensorData::waveTypeSelector(){
 			}
 			
 			//wait for button to be released
-			while(button == 1){
+			while(button == PRESSED){
 				
 			} //end of wait for release
-				
-
-				
-
 			wave.setWaveType(currentWaveType);
 		}
-		
 		//if button was off before debounce buffer ended
 		else{
 			return;

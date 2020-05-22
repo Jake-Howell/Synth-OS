@@ -1,9 +1,7 @@
 ////////////////////////////////
 //														//
-//	This code is not finished	//
-//	and has some parts that 	//
-//	will be removed or 				//
-//	updated soon.							//
+//	ELEC 145 Design and build //
+//					Synth-OS					//
 //														//
 ////////////////////////////////
 
@@ -18,10 +16,6 @@
 Serial pc(USBTX, USBRX);
 DigitalOut led1(LED1);
 
-//Thread outputThread;
-//Thread inputThread;
-
-//LowPowerTicker inputTicker;
 Timer trigger;
 
 UpdateOutput wave;
@@ -36,13 +30,6 @@ int main() {
 	pc.printf("\r\n\r\ninside main\r\n\r\n");
 	
 	led1 = 1;					//turn on led1 to show main is running
-	int setWaveType = TRIANGLE;
-	
-	//getting inputs 
-	//inputTicker.attach(callback(updateInput),UPDATE_INPUT_RATE);
-	
-	
-	led1 = 1;					//turn on led1 to show main is running
 
 	wave.setWaveType(SINE);
 	
@@ -51,9 +38,12 @@ int main() {
 	//UPDATING OUTPUT
 	while(true){
 		while (trigger.read() < UPDATE_INPUT_RATE){
+			//updating output while inputs arnt being updated
 			wave.createSample();
 		}
 		trigger.reset();
+		
+		//getting inputs at specified 'UPDATE_INPUT_RATE'
 		inputs.waveTypeSelector();
 		inputs.updateFrequency();
 	}//end of while

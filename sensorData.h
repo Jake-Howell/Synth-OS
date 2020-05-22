@@ -23,7 +23,7 @@ class SensorData{
 	private:
 		//private member functions
 		float getFrequency();
-		float calibrateSonar();
+		int calibrateSonar();
 		
 		//private attributes
 		DigitalOut trigger;

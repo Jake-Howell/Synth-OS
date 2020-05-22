@@ -60,8 +60,6 @@ void UpdateOutput::type(){
 				waveType = OFF;
 				break;
 					
-		
 		}//end of wave type switch case
-		//return Vout;
 		dac.write(Vout);
 }

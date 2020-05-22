@@ -1,6 +1,6 @@
 #include "sensorData.h"
 
-float SensorData::calibrateSonar(){
+int SensorData::calibrateSonar(){
 				Timer time;
 			
 				float distance = 0;

@@ -2,12 +2,10 @@
 #include "mbed.h"
 #include "updateOutput.h"
 
-extern UpdateOutput wave;
-
 void UpdateOutput::createSample(){
 	
 	
-	int currentTime = sampleClock.read_us();						//read sampleClock function
+	int currentTime = sampleClock.read_us();			//read sampleClock
 	
 	//figure out which sample we need to create depending on sampleClock
 	currentSampleNo = currentTime/SAMPLE_PERIOD_us;			
@@ -20,7 +18,8 @@ void UpdateOutput::createSample(){
 	int sampleTrigger = sampleTriggerClock.read_us();
 	
 	if (sampleTrigger >= SAMPLE_PERIOD_us - jitterAdjust){
-		//update output when sampleTriggerClock equals SAMPLE_PERIOD_us - the time offset (to subtract the jitter)
+		//update output when sampleTriggerClock equals 
+		//SAMPLE_PERIOD_us (23us)  minus the time offset (to subtract the jitter)
 		type();
 		
 		if (currentSampleNo > SAMPLES_PER_SECOND){
